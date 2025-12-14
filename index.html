@@ -105,9 +105,34 @@
 
   </main>
 <script>
-  const VALID_KEY = "TEST_KEY_123"; // меняешь КОГДА ЗАХОЧЕШЬ
+  // ===== НАСТРОЙКИ =====
+  const VALID_KEY = "TEST_KEY_123";
   const STORAGE_KEY = "key_used";
 
+  // ===== ВКЛАДКИ =====
+  const tabGet = document.getElementById("tab-get");
+  const tabCreate = document.getElementById("tab-create");
+
+  const sectionGet = document.getElementById("get");
+  const sectionCreate = document.getElementById("create");
+
+  tabGet.addEventListener("click", () => {
+    tabGet.classList.add("active");
+    tabCreate.classList.remove("active");
+
+    sectionGet.classList.add("active");
+    sectionCreate.classList.remove("active");
+  });
+
+  tabCreate.addEventListener("click", () => {
+    tabCreate.classList.add("active");
+    tabGet.classList.remove("active");
+
+    sectionCreate.classList.add("active");
+    sectionGet.classList.remove("active");
+  });
+
+  // ===== ПОЛУЧИТЬ =====
   const getButton = document.querySelector("#get .action");
   const inputKey = document.querySelector("#get input");
   const errorText = document.querySelector("#get .error");
@@ -128,11 +153,27 @@
       return;
     }
 
-    // ✅ код правильный
     localStorage.setItem(STORAGE_KEY, "true");
     errorText.style.display = "none";
 
     alert("Код принят. Скрипт выполнен 🚀");
+  });
+
+  // ===== СОЗДАТЬ / КОШЕЛЁК =====
+  const connectButton = document.querySelector("#create .action");
+
+  connectButton.addEventListener("click", async () => {
+    if (!window.solana || !window.solana.isPhantom) {
+      alert("Phantom Wallet не установлен");
+      return;
+    }
+
+    try {
+      const res = await window.solana.connect();
+      alert("Кошелёк подключён:\n" + res.publicKey.toString());
+    } catch {
+      alert("Подключение отменено");
+    }
   });
 </script>
 
