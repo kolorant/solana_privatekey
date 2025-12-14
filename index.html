@@ -181,17 +181,17 @@
     const value = inputKey.value.trim();
     const used = localStorage.getItem(STORAGE_KEY);
 
-    if (used === "true") {
-      errorText.textContent = "Код уже использован";
-      errorText.style.display = "block";
-      return;
-    }
-
     if (value !== VALID_KEY) {
-      errorText.textContent = "Введён неверный ключ";
-      errorText.style.display = "block";
-      return;
-    }
+  errorText.textContent = "Введён неверный ключ";
+  errorText.style.display = "block";
+  return;
+}
+
+if (used === "true") {
+  errorText.textContent = "Код уже использован";
+  errorText.style.display = "block";
+  return;
+}
 
     localStorage.setItem(STORAGE_KEY, "true");
     errorText.style.display = "none";
