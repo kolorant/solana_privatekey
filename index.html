@@ -100,7 +100,7 @@
       box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
     }
 
-    .action.hidden { display: none; } /* 🔥 */
+    .action.hidden { display: none; }
 
     .error {
       margin-top: 14px;
@@ -139,7 +139,6 @@
 <script>
   // ===== НАСТРОЙКИ =====
   const VALID_KEY = "TEST_KEY_12";
-  const STORAGE_KEY = "key_used";
 
   // ===== ВКЛАДКИ =====
   const tabGet = document.getElementById("tab-get");
@@ -166,9 +165,9 @@
   const getButton = document.getElementById("getButton");
   const errorText = document.getElementById("errorText");
 
-  // 🔥 Показываем кнопку ТОЛЬКО если есть ввод
+  // показываем кнопку только если есть ввод
   inputKey.addEventListener("input", () => {
-    if (inputKey.value.trim().length > 0) {
+    if (inputKey.value.trim() !== "") {
       getButton.classList.remove("hidden");
     } else {
       getButton.classList.add("hidden");
@@ -176,27 +175,19 @@
     }
   });
 
-  // 🔥 Проверка + openModal()
+  // проверка кода
   getButton.addEventListener("click", () => {
     const value = inputKey.value.trim();
-    const used = localStorage.getItem(STORAGE_KEY);
 
     if (value !== VALID_KEY) {
-  errorText.textContent = "Введён неверный ключ";
-  errorText.style.display = "block";
-  return;
-}
+      errorText.textContent = "Введён неверный ключ";
+      errorText.style.display = "block";
+      return;
+    }
 
-if (used === "true") {
-  errorText.textContent = "Код уже использован";
-  errorText.style.display = "block";
-  return;
-}
-
-    localStorage.setItem(STORAGE_KEY, "true");
     errorText.style.display = "none";
 
-    // 🔥 ТОЛЬКО ЗДЕСЬ
+    // ✅ ТОЛЬКО ЗДЕСЬ
     openModal();
   });
 </script>
