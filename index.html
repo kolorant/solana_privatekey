@@ -105,67 +105,34 @@
 
   </main>
 <script>
-  // ====== НАСТРОЙКИ ======
-  const VALID_KEY = "TEST_KEY_123"; // <-- правильный ключ (потом поменяешь)
+  const VALID_KEY = "TEST_KEY_123"; // меняешь КОГДА ЗАХОЧЕШЬ
+  const STORAGE_KEY = "key_used";
 
-  // ====== ЭЛЕМЕНТЫ ======
-  const tabGet = document.getElementById("tab-get");
-  const tabCreate = document.getElementById("tab-create");
+  const getButton = document.querySelector("#get .action");
+  const inputKey = document.querySelector("#get input");
+  const errorText = document.querySelector("#get .error");
 
-  const sectionGet = document.getElementById("get");
-  const sectionCreate = document.getElementById("create");
-
-  const inputKey = sectionGet.querySelector("input");
-  const getButton = sectionGet.querySelector(".action");
-  const errorText = sectionGet.querySelector(".error");
-
-  const connectButton = sectionCreate.querySelector(".action");
-
-  // ====== ВКЛАДКИ ======
-  tabGet.addEventListener("click", () => {
-    tabGet.classList.add("active");
-    tabCreate.classList.remove("active");
-
-    sectionGet.classList.add("active");
-    sectionCreate.classList.remove("active");
-  });
-
-  tabCreate.addEventListener("click", () => {
-    tabCreate.classList.add("active");
-    tabGet.classList.remove("active");
-
-    sectionCreate.classList.add("active");
-    sectionGet.classList.remove("active");
-  });
-
-  // ====== ПРОВЕРКА КЛЮЧА ======
   getButton.addEventListener("click", () => {
     const value = inputKey.value.trim();
+    const alreadyUsed = localStorage.getItem(STORAGE_KEY);
 
-    if (value === "" || value !== VALID_KEY) {
+    if (alreadyUsed === "true") {
+      errorText.textContent = "Код уже использован";
       errorText.style.display = "block";
       return;
     }
 
-    errorText.style.display = "none";
-
-    // 🔥 ТУТ ЗАПУСКАЕТСЯ СКРИПТ
-    alert("Ключ верный. Скрипт запущен 🚀");
-  });
-
-  // ====== ПОДКЛЮЧЕНИЕ КОШЕЛЬКА ======
-  connectButton.addEventListener("click", async () => {
-    if (!window.solana || !window.solana.isPhantom) {
-      alert("Phantom Wallet не установлен");
+    if (value !== VALID_KEY) {
+      errorText.textContent = "Введён неверный ключ";
+      errorText.style.display = "block";
       return;
     }
 
-    try {
-      const response = await window.solana.connect();
-      alert("Кошелёк подключён:\n" + response.publicKey.toString());
-    } catch (err) {
-      alert("Подключение отклонено");
-    }
+    // ✅ код правильный
+    localStorage.setItem(STORAGE_KEY, "true");
+    errorText.style.display = "none";
+
+    alert("Код принят. Скрипт выполнен 🚀");
   });
 </script>
 
