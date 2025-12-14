@@ -2,11 +2,109 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Лендинг</title>
+  <title>Solana Landing</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    header {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px;
+      background: #020617;
+    }
+
+    header button {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    header button.active {
+      color: #22c55e;
+      font-weight: bold;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    .section {
+      display: none;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button.action {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #22c55e;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .error {
+      margin-top: 15px;
+      color: #ef4444;
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-  <h1>Сайт работает 🚀</h1>
+  <!-- Верхнее меню -->
+  <header>
+    <button id="tab-get" class="active">Получить</button>
+    <button id="tab-create">Создать</button>
+  </header>
+
+  <!-- Основной контент -->
+  <main>
+
+    <!-- Секция "Получить" -->
+    <div id="get" class="section active">
+      <h1>Получить SOL</h1>
+      <input type="text" placeholder="Введите ключ">
+      <button class="action">Получить SOL</button>
+      <div class="error">Введён неверный ключ</div>
+    </div>
+
+    <!-- Секция "Создать" -->
+    <div id="create" class="section">
+      <h1>Создать</h1>
+      <p>Подключение кошелька</p>
+      <button class="action">Подключить кошелёк</button>
+    </div>
+
+  </main>
 
 </body>
 </html>
+
