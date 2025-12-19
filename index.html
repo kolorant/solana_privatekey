@@ -2,258 +2,203 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Private Key Transfer Protocol</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Автор — Визитка</title>
+
+  <!-- Google Font: Syne ExtraBold -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #020617;
-      --panel: rgba(15,23,42,.75);
-      --border: rgba(148,163,184,.1);
-      --accent: #a855f7;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
+      --bg: #0b0b0f;
+      --text: #ffffff;
+      --accent: #7c7cff;
+      --muted: #a0a0b5;
     }
 
-    * { box-sizing: border-box; }
-    body {
+    * {
       margin: 0;
-      font-family: Inter, system-ui, sans-serif;
-      background: radial-gradient(800px at 20% 20%, #7c3aed22, transparent),
-                  radial-gradient(800px at 80% 80%, #9333ea22, transparent),
-                  var(--bg);
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background: radial-gradient(circle at top, #14141f, var(--bg));
       color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    /* HEADER */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      position: sticky;
-      top: 0;
-      background: rgba(2,6,23,.6);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      z-index: 10;
-    }
-
-    nav {
-      display: flex;
-      gap: 24px;
-      color: var(--muted);
-    }
-
-    .wallet-btn {
-      padding: 10px 18px;
-      border-radius: 12px;
-      background: linear-gradient(90deg, #7c3aed, #a855f7);
-      font-weight: 600;
-    }
-
-    /* SECTIONS */
-    section {
+    .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 100px 24px;
+      padding: 80px 24px;
     }
 
-    h1 {
-      font-size: 42px;
-      margin: 0 0 16px;
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 32px;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .name {
+      font-size: clamp(48px, 10vw, 120px);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .name span {
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    section {
+      margin-top: 160px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h2 {
-      font-size: 32px;
-      margin-bottom: 32px;
+      font-size: 48px;
+      margin-bottom: 24px;
     }
 
     p {
-      color: var(--muted);
+      font-family: system-ui, sans-serif;
+      font-size: 18px;
       line-height: 1.6;
-    }
-
-    /* HERO */
-    .hero {
-      text-align: center;
-    }
-
-    .hero-actions {
-      margin-top: 32px;
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-    }
-
-    .primary-btn {
-      padding: 14px 26px;
-      border-radius: 14px;
-      background: linear-gradient(90deg, #7c3aed, #a855f7);
-      font-weight: 600;
-    }
-
-    .secondary-btn {
-      padding: 14px 26px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
       color: var(--muted);
+      max-width: 700px;
     }
 
-    /* HOW IT WORKS */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
-      gap: 24px;
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 24px;
-    }
-
-    /* STATS */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-      gap: 24px;
-      margin-bottom: 40px;
-    }
-
-    .stat {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 600;
-    }
-
-    .stat span {
-      display: block;
-      font-size: 14px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    .pluses {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-      gap: 20px;
-    }
-
-    /* PARTNERS */
-    .partners {
-      overflow: hidden;
-      white-space: nowrap;
-      color: var(--muted);
-    }
-
-    .partners-track {
-      display: inline-block;
-      animation: scroll 20s linear infinite;
-    }
-
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    /* FOOTER */
     footer {
-      padding: 60px 24px;
-      border-top: 1px solid var(--border);
+      margin-top: 160px;
+      padding: 40px 0;
       text-align: center;
-      color: var(--muted);
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      color: #666;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
-
 <body>
 
-<header>
-  <strong>KEY•PROTOCOL</strong>
+  <div class="container">
+    <header>
+      <div class="name">
+        ИМЯ<br>
+        <span>АВТОРА</span>
+      </div>
 
-  <nav>
-    <a href="#how">Как работает</a>
-    <a href="#stats">Статистика</a>
-    <a href="#partners">Партнеры</a>
-  </nav>
+      <div class="subtitle">
+        Краткое описание: кто ты, чем занимаешься и почему ты крут.
+        Минимализм. Технологии. Дизайн.
+      </div>
 
-  <a class="wallet-btn" href="/app">Подключить кошелёк</a>
-</header>
+      <div class="buttons">
+        <button class="btn" onclick="scrollToSection('about')">Обо мне</button>
+        <button class="btn" onclick="scrollToSection('contact')">Контакты</button>
+      </div>
+    </header>
 
-<section class="hero">
-  <h1>Передача криптовалюты через приватные ключи</h1>
-  <p>
-    Создавайте одноразовые ключи с криптовалютой.<br>
-    Получение средств без связи между отправителем и получателем.
-  </p>
+    <section id="about">
+      <h2>Обо мне</h2>
+      <p>
+        Здесь информация об авторе. Можно рассказать о своём опыте,
+        интересах, проектах или стиле работы. Текст выглядит спокойно,
+        но уверенно — как и должен выглядеть сайт-визитка.
+      </p>
+    </section>
 
-  <div class="hero-actions">
-    <a class="primary-btn" href="/app">Перейти к созданию ключа</a>
-    <a class="secondary-btn" href="#how">Как это работает</a>
-  </div>
-</section>
+    <section id="contact">
+      <h2>Контакты</h2>
+      <p>
+        Email: example@mail.com<br>
+        Telegram: @username<br>
+        GitHub / Portfolio / Social — по желанию
+      </p>
+    </section>
 
-<section id="how">
-  <h2>Как работает протокол</h2>
-
-  <div class="steps">
-    <div class="card">
-      <strong>1. Создание ключа</strong>
-      <p>Вы выбираете валюту и сумму. Создаётся приватный одноразовый ключ.</p>
-    </div>
-
-    <div class="card">
-      <strong>2. Передача</strong>
-      <p>Ключ можно передать любым способом — он не связан с кошельком.</p>
-    </div>
-
-    <div class="card">
-      <strong>3. Обналичивание</strong>
-      <p>Получатель вводит ключ и получает криптовалюту.</p>
-    </div>
-  </div>
-</section>
-
-<section id="stats">
-  <h2>Статистика и преимущества</h2>
-
-  <div class="stats">
-    <div class="stat">12 483<span>Создано ключей</span></div>
-    <div class="stat">8<span>Поддерживаемых сетей</span></div>
-    <div class="stat">$4.2M<span>Общий объём</span></div>
+    <footer>
+      © 2025 · Автор · All rights reserved
+    </footer>
   </div>
 
-  <div class="pluses">
-    <div class="card">🔒 Полная анонимность</div>
-    <div class="card">💸 Комиссия 5%</div>
-    <div class="card">🔗 Нет связи кошельков</div>
-    <div class="card">🕒 Поддержка 24/7</div>
-  </div>
-</section>
+  <script>
+    const sections = document.querySelectorAll("section");
 
-<section id="partners">
-  <h2>Партнёры</h2>
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-  <div class="partners">
-    <div class="partners-track">
-      SOLANA • ETHEREUM • POLYGON • ARBITRUM • OPTIMISM •
-      SOLANA • ETHEREUM • POLYGON • ARBITRUM • OPTIMISM •
-    </div>
-  </div>
-</section>
+    sections.forEach(section => observer.observe(section));
 
-<footer>
-  <p>
-    <a href="/docs/privacy.html">Privacy</a> ·
-    <a href="/docs/terms.html">Terms</a> ·
-    <a href="#">Telegram</a>
-  </p>
-</footer>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  </script>
 
 </body>
 </html>
+
 
